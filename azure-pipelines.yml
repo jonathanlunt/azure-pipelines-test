@@ -22,7 +22,7 @@ steps:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
-  - script: python -m pip install --upgrade pip tox
+  - script: python -m pip install --upgrade pip tox codecov
     displayName: 'Install build & test tools'
 
   - script: |
