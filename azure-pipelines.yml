@@ -3,9 +3,6 @@
 pool:
   vmImage: 'ubuntu-16.04' # other options: 'macOS-10.13', 'vs2017-win2016'
 
-variables:
-  CODECOV_TOKEN: '$(codecov.token)'
-
 strategy:
   matrix:
 #    Python27:
@@ -37,6 +34,8 @@ steps:
     condition: succeeded()
     displayName: 'Coverage'
 
-  - script: codecov
+  - script: codecov --token=$env:CODECOV_TOKEN
     condition: succeeded()
     displayName: 'Codecov'
+    env:
+      CODECOV_TOKEN: '$(codecov.token)'
