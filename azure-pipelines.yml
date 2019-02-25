@@ -7,13 +7,13 @@ strategy:
   matrix:
     Python27:
       python.version: '2.7'
-      tox.version: 'py27'
+      tox.python: 'py27'
     Python36:
       python.version: '3.6'
-      tox.version: 'py36'
+      tox.python: 'py36'
     Python37:
       python.version: '3.7'
-      tox.version: 'py37'
+      tox.python: 'py37'
   maxParallel: 1
 
 steps:
@@ -34,13 +34,9 @@ steps:
   - script: python -m pip install .[tests]
     displayName: 'Install distribution & requirements'
 
-  - script: tox -e $(tox.version)
+  - script: tox -e $(tox.python)
     condition: succeeded()
     displayName: 'Pytest'
-
-  - script: tox -e $(tox.version):coverage
-    condition: succeeded()
-    displayName: 'Coverage'
 
   - script: codecov --required --token=$(codecov.token)
     condition: succeeded()
