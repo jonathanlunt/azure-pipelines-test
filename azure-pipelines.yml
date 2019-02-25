@@ -3,6 +3,8 @@
 pool:
   vmImage: 'ubuntu-16.04' # other options: 'macOS-10.13', 'vs2017-win2016'
 
+variables:
+  CODECOV_TOKEN: '$(codecov.token)'
 
 strategy:
   matrix:
@@ -29,12 +31,12 @@ steps:
 
   - script: pytest tests
     condition: succeeded()
-    displayName: 'Run tests'
+    displayName: 'Pytest'
 
   - script: coverage run -m pytest tests
     condition: succeeded()
-    displayName: 'Run coverage'
+    displayName: 'Coverage'
 
   - script: codecov
     condition: succeeded()
-    displayName: 'Run codecov'
+    displayName: 'Codecov'
