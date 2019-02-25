@@ -22,7 +22,7 @@ steps:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
-  - script: python -m pip install --upgrade pip codecov tox coverage
+  - script: python -m pip install --upgrade pip tox
     displayName: 'Install build & test tools'
 
   - script: |
@@ -31,12 +31,9 @@ steps:
     displayName: 'Black'
     condition: ne(variables['python.version'], '2.7')
 
-  - script: python -m pip install .[tests]
-    displayName: 'Install distribution & requirements'
-
   - script: tox -e $(tox.python)
     condition: succeeded()
-    displayName: 'Pytest'
+    displayName: 'Tox: Coverage + Pytest'
 
   - script: codecov --required --token=$(codecov.token)
     condition: succeeded()
