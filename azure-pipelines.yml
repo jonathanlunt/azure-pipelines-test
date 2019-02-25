@@ -22,11 +22,14 @@ steps:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
-  - script: python -m pip install --upgrade pip codecov tox coverage black
+  - script: python -m pip install --upgrade pip codecov tox coverage
     displayName: 'Install build & test tools'
 
-  - script: black --check .
+  - script: |
+      pip install black
+      black --check .
     displayName: 'Black'
+    condition: ne(variables['python.version'], '2.7')
 
   - script: python -m pip install .[tests]
     displayName: 'Install distribution & requirements'
