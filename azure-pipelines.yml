@@ -34,6 +34,8 @@ steps:
     condition: succeeded()
     displayName: 'Coverage'
 
-  - script: codecov --required
+  - script: codecov --required --token=$env:TOKEN
     condition: succeeded()
     displayName: 'Codecov'
+    env:
+      TOKEN: $(codecov.token)
