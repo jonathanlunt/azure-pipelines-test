@@ -18,7 +18,7 @@ strategy:
 
 steps:
   - task: UsePythonVersion@0
-    inputs:x
+    inputs:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
@@ -35,8 +35,7 @@ steps:
     condition: succeeded()
     displayName: 'Pytest'
 
-  - script: |
-      tox -e $(tox.version):coverage
+  - script: tox -e $(tox.version):coverage
     condition: succeeded()
     displayName: 'Coverage'
 
