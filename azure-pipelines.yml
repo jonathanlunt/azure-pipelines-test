@@ -34,6 +34,6 @@ steps:
     condition: succeeded()
     displayName: 'Coverage'
 
-  - script: codecov
+  - script: codecov --required
     condition: succeeded()
     displayName: 'Codecov'
