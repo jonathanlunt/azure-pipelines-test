@@ -37,6 +37,6 @@ jobs:
     condition: succeeded()
     displayName: 'Tox: Coverage + Pytest'
 
-  - script: codecov --required --token=$(codecov.token) --name="${{ parameters.name }} $(Agent.JobName)"
+  - script: codecov --required --token=$(codecov.token) --build=$(Build.BuildId) --name="${{ parameters.name }} $(Agent.JobName)"
     condition: succeeded()
     displayName: 'Codecov'
