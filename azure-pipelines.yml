@@ -39,6 +39,3 @@ jobs:
 #    vmImage: 'vs2017-win2016'
 
 
-#    - script: codecov --required --token=$(codecov.token)
-#      condition: succeeded()
-#      displayName: 'Codecov'

@@ -35,3 +35,7 @@ jobs:
   - script: tox -e $(tox.python)
     condition: succeeded()
     displayName: 'Tox: Coverage + Pytest'
+    
+  - script: codecov --required --token=$(codecov.token)
+    condition: succeeded()
+    displayName: 'Codecov'
