@@ -25,11 +25,13 @@ jobs:
 
   steps:
   - script: |
+      echo $(parameters.name)
+      echo ${{ parameters.name }}
+      echo $(Agent.OS)
       echo $(Agent.JobName)
       echo $(Agent.Id)
       echo $(Agent.Name)
       echo $(Build.DefinitionName)
-
 
   - task: UsePythonVersion@0
     inputs:
