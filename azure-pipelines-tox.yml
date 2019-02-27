@@ -6,9 +6,9 @@ jobs:
 
   strategy:
     matrix:
-      Python27:
-        python.version: '2.7'
-        tox.python: 'py27'
+#      Python27:
+#        python.version: '2.7'
+#        tox.python: 'py27'
 #      Python34:
 #        python.version: '3.4'
 #        tox.python: 'py34'
@@ -36,6 +36,21 @@ jobs:
     condition: succeeded()
     displayName: 'Tox: Coverage + Pytest'
 
-  - script: codecov --required --token=$(codecov.token)
-    condition: succeeded()
-    displayName: 'Codecov'
+  - script: |
+      echo 'Working Directory'
+      ls -al
+      echo 'Tox Directory'
+      ls -al .tox/
+
+#
+#  - task: CopyFiles@2
+#    condition: succeededOrFailed()
+#    inputs:
+#      sourceFolder: $(System.DefaultWorkingDirectory)/.tox
+#      contents: |
+#        .coverage
+#        coverage.xml
+#      targetFolder: $(Build.StagingDirectory)
+#    displayName: 'Aggregate coverage files'
+
+
