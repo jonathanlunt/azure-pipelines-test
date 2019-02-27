@@ -24,32 +24,19 @@ jobs:
     maxParallel: 1
 
   steps:
-  - script: |
-      echo $(parameters.name)
-      echo ${{ parameters.name }}
-      echo $(Agent.OS)
-      echo $(Agent.JobName)
-      echo $(Agent.Id)
-      echo $(Agent.Name)
-      echo $(Build.DefinitionName)
 
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '$(python.version)'
       architecture: 'x64'
 
+  - script: python -m pip install --upgrade pip tox codecov
+    displayName: 'Install test tools'
 
-  - script: python -m pip install --upgrade pip tox
-    displayName: 'Tox only install...'
+  - script: tox -e $(tox.python)
+    condition: succeeded()
+    displayName: 'Tox: Coverage + Pytest'
 
-#
-#  - script: python -m pip install --upgrade pip tox codecov
-#    displayName: 'Install build & test tools'
-#
-#  - script: tox -e $(tox.python)
-#    condition: succeeded()
-#    displayName: 'Tox: Coverage + Pytest'
-#
-#  - script: codecov --required --token=$(codecov.token) --name=$(Agent.JobName)
-#    condition: succeeded()
-#    displayName: 'Codecov'
+  - script: codecov --required --token=$(codecov.token) --name="${{ parameters.name }} $(Agent.JobName)"
+    condition: succeeded()
+    displayName: 'Codecov'
