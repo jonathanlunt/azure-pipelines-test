@@ -21,9 +21,7 @@ jobs:
     displayName: 'Black'
 
 # Run tests in each environment
-- job: Linux
-  pool:
-    vmImage: 'ubuntu-16.04'  # other options: 'macOS-10.13', 'vs2017-win2016'
-  steps:
-  - template: azure-pipelines-tox.yml  # Template reference
-
+- template: azure-pipelines-tox.yml
+  parameters:
+    name: Linux
+    vmImage: 'ubuntu-16.04'

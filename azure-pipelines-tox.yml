@@ -1,5 +1,8 @@
 jobs:
-- job: PythonTests
+- job: ${{ parameters.name }}
+
+  pool:
+    vmImage: ${{ parameters.vmImage }}
 
   strategy:
     matrix:
