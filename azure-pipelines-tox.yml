@@ -1,0 +1,35 @@
+jobs:
+- job: PythonTests
+
+  pool:
+    vmImage: 'ubuntu-16.04' # other options: 'macOS-10.13', 'vs2017-win2016'
+
+  strategy:
+    matrix:
+      Python27:
+        python.version: '2.7'
+        tox.python: 'py27'
+      Python36:
+        python.version: '3.6'
+        tox.python: 'py36'
+      Python37:
+        python.version: '3.7'
+        tox.python: 'py37'
+    maxParallel: 1
+
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(python.version)'
+      architecture: 'x64'
+
+  - script: python -m pip install --upgrade pip tox codecov
+    displayName: 'Install build & test tools'
+
+  - script: tox -e $(tox.python)
+    condition: succeeded()
+    displayName: 'Tox: Coverage + Pytest'
+
+  - script: codecov --required --token=$(codecov.token)
+    condition: succeeded()
+    displayName: 'Codecov'
