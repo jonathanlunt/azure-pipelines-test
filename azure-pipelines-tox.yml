@@ -28,6 +28,7 @@ jobs:
       echo $(Agent.JobName)
       echo $(Agent.Id)
       echo $(Agent.Name)
+      echo $(Build.DefinitionName)
 
 
   - task: UsePythonVersion@0
