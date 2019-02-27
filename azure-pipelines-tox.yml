@@ -9,19 +9,19 @@ jobs:
       Python27:
         python.version: '2.7'
         tox.python: 'py27'
-      Python34:
-        python.version: '3.4'
-        tox.python: 'py34'
-      Python35:
-        python.version: '3.5'
-        tox.python: 'py35'
-      Python36:
-        python.version: '3.6'
-        tox.python: 'py36'
+#      Python34:
+#        python.version: '3.4'
+#        tox.python: 'py34'
+#      Python35:
+#        python.version: '3.5'
+#        tox.python: 'py35'
+#      Python36:
+#        python.version: '3.6'
+#        tox.python: 'py36'
       Python37:
         python.version: '3.7'
         tox.python: 'py37'
-    maxParallel: 5
+    maxParallel: 1
 
   steps:
   - task: UsePythonVersion@0
